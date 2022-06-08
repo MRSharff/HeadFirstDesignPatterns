@@ -1,10 +1,18 @@
 package dev.msharff.weathermonitoringstation;
 
-public class WeatherData {
+import java.util.ArrayList;
+import java.util.List;
 
-    Observer currentConditionsDisplay;
-    Observer statisticsDisplay;
-    Observer forecastDisplay;
+public class WeatherData implements Subject {
+
+    private List<Observer> observers;
+    private float temperature;
+    private float humidity;
+    private float pressure;
+
+    public WeatherData() {
+        observers = new ArrayList<>();
+    }
 
     public float getTemperature() {
         return 0;
@@ -23,13 +31,32 @@ public class WeatherData {
      * weather measurements have been updated.
      */
     public void measurementsChanged() {
-        float temp = getTemperature();
-        float humidity = getHumidity();
-        float pressure = getPressure();
+        notifyObservers();
+    }
 
-        currentConditionsDisplay.update(temp, humidity, pressure);
-        statisticsDisplay.update(temp, humidity, pressure);
-        forecastDisplay.update(temp, humidity, pressure);
+    @Override
+    public void registerObserver(Observer o) {
+        // TODO: Looks like we can add an observer more than once here.
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer obs : observers) {
+            obs.update(temperature, humidity, pressure);
+        }
+    }
+
+    public void setMeasurements(float temperature, float humidity, float pressure) {
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        measurementsChanged();
     }
 }
 
