@@ -15,19 +15,9 @@ public class SwingObserverExample {
     private void go() {
         frame = new JFrame();
         JButton button = new JButton("Should I do it?");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Don't do it, you might regret it!");
-            }
-        });
+        button.addActionListener(actionEvent -> System.out.println("Don't do it, you might regret it!"));
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Come on, do it!!");
-            }
-        });
+        button.addActionListener(actionEvent -> System.out.println("Come on, do it!!"));
 
         frame.setLocation(600, 700);
         frame.setSize(200, 200);
