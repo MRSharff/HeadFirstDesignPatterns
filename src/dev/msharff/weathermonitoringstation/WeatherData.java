@@ -2,9 +2,9 @@ package dev.msharff.weathermonitoringstation;
 
 public class WeatherData {
 
-    Display currentConditionsDisplay;
-    Display statisticsDisplay;
-    Display forecastDisplay;
+    Observer currentConditionsDisplay;
+    Observer statisticsDisplay;
+    Observer forecastDisplay;
 
     public float getTemperature() {
         return 0;
@@ -32,3 +32,4 @@ public class WeatherData {
         forecastDisplay.update(temp, humidity, pressure);
     }
 }
+

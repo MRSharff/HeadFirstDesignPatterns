@@ -1,5 +1,5 @@
 package dev.msharff.weathermonitoringstation;
 
-public interface Display {
+public interface Observer {
     void update(float temp, float humidity, float pressure);
 }
