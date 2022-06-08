@@ -3,9 +3,11 @@ package dev.msharff.weathermonitoringstation;
 public class HeatIndexDisplay implements Observer, DisplayElement {
 
     private float apparentTemp;
+    private WeatherData weatherData;
 
     public HeatIndexDisplay(WeatherData weatherData) {
         weatherData.registerObserver(this);
+        this.weatherData = weatherData;
     }
 
     @Override
@@ -14,7 +16,9 @@ public class HeatIndexDisplay implements Observer, DisplayElement {
     }
 
     @Override
-    public void update(float temp, float humidity, float pressure) {
+    public void update() {
+        float temp = weatherData.getTemperature();
+        float humidity = weatherData.getHumidity();
         apparentTemp = computeHeatIndex(temp, humidity);
         display();
     }
