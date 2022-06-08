@@ -3,7 +3,6 @@ package dev.msharff.weathermonitoringstation;
 import java.util.LinkedList;
 
 public class StatisticsDisplay implements Observer, DisplayElement {
-    boolean isWindowFull = false;
     private int windowSize = 20;
     private float runningTotal = 0;
     private LinkedList<Float> window;
