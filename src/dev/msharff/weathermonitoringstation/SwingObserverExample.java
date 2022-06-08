@@ -14,15 +14,17 @@ public class SwingObserverExample {
 
     private void go() {
         frame = new JFrame();
+
         JButton button = new JButton("Should I do it?");
         button.addActionListener(actionEvent -> System.out.println("Don't do it, you might regret it!"));
-
         button.addActionListener(actionEvent -> System.out.println("Come on, do it!!"));
 
+
+        frame.add(button);
         frame.setLocation(600, 700);
         frame.setSize(200, 200);
-        frame.add(button);
         button.setSize(200, 200);
+
         frame.setVisible(true);
     }
 
