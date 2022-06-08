@@ -9,8 +9,8 @@ public class StatisticsDisplay implements Observer, DisplayElement {
     private LinkedList<Float> window;
 
     private float avgTemp;
-    private float minTemp;
-    private float maxTemp;
+    private float minTemp = 10000;
+    private float maxTemp = -10000;
     private WeatherData weatherData;
 
     public StatisticsDisplay(WeatherData weatherData) {
@@ -24,10 +24,7 @@ public class StatisticsDisplay implements Observer, DisplayElement {
     @Override
     public void display() {
         System.out.println(
-            "Weather Stats:\n" +
-            "Avg. temp: " + avgTemp +
-            "Min. temp: " + minTemp +
-            "Max. temp: " + maxTemp
+            "Weather Stats: " + "Avg. temp: " + avgTemp + " Min. temp: " + minTemp + " Max. temp: " + maxTemp
         );
     }
 
@@ -35,7 +32,9 @@ public class StatisticsDisplay implements Observer, DisplayElement {
     public void update(float temp, float humidity, float pressure) {
         if (temp < minTemp) {
             minTemp = temp;
-        } else if (temp > maxTemp) {
+        }
+
+        if (temp > maxTemp) {
             maxTemp = temp;
         }
 
@@ -47,5 +46,6 @@ public class StatisticsDisplay implements Observer, DisplayElement {
         window.add(temp);
         runningTotal += temp;
         avgTemp = runningTotal / window.size();
+        display();
     }
 }
